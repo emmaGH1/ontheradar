@@ -36,62 +36,26 @@ body {
   }
 }
 
-/* Orb layers breathe (scale + opacity only — parent owns position) */
-@keyframes hero-orb-breathe {
+/* Arc glow — calm drift (matches “in motion” reference) */
+@keyframes hero-arc-drift {
   0%,
   100% {
-    opacity: 0.82;
-    transform: scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
   }
   50% {
-    opacity: 1;
-    transform: scale(1.04);
+    transform: translate3d(1.2%, -0.8%, 0) scale(1.02);
+    opacity: 0.92;
   }
 }
 
-@keyframes hero-orb-body {
-  0%,
-  100% {
-    opacity: 0.88;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.03);
-  }
-}
-
-@keyframes hero-orb-core {
-  0%,
-  100% {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-}
-
-.hero-orb--halo {
-  animation: hero-orb-breathe 7.5s ease-in-out infinite;
-  will-change: transform, opacity;
-}
-
-.hero-orb--body {
-  animation: hero-orb-body 6.2s ease-in-out infinite;
-  will-change: transform, opacity;
-}
-
-.hero-orb--core {
-  animation: hero-orb-core 5.2s ease-in-out infinite;
+.hero-arc-drift {
+  animation: hero-arc-drift 14s ease-in-out infinite;
   will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-orb--halo,
-  .hero-orb--body,
-  .hero-orb--core {
+  .hero-arc-drift {
     animation: none;
   }
 }
