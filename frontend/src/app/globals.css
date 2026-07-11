@@ -36,7 +36,66 @@ body {
   }
 }
 
-/* monospaced eyebrows use next/font mono var */
+/* Orb layers breathe (scale + opacity only — parent owns position) */
+@keyframes hero-orb-breathe {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes hero-orb-body {
+  0%,
+  100% {
+    opacity: 0.88;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes hero-orb-core {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.hero-orb--halo {
+  animation: hero-orb-breathe 7.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.hero-orb--body {
+  animation: hero-orb-body 6.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.hero-orb--core {
+  animation: hero-orb-core 5.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb--halo,
+  .hero-orb--body,
+  .hero-orb--core {
+    animation: none;
+  }
+}
+
 .font-mono {
   font-family: var(--font-mono), ui-monospace, monospace;
 }

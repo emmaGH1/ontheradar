@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { MotionSection } from "./MotionSection";
+import { RefractionGlass } from "./RefractionGlass";
 import { SectionBody, SectionEyebrow, SectionTitle } from "./Section";
 
 const METRICS = [
@@ -67,26 +68,6 @@ function SkeletonMesh({ progress }: { progress: number }) {
         />
       ))}
     </svg>
-  );
-}
-
-function RefractionGlass({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#1A1A1E]/55 p-1 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]">
-      {/* morphing colour blobs behind the glass */}
-      <div
-        className="pointer-events-none absolute inset-0 overflow-hidden rounded-[28px]"
-        aria-hidden
-      >
-        <div className="absolute -left-10 top-0 h-56 w-56 animate-[blob_12s_ease-in-out_infinite] rounded-full bg-[#C6FF3A]/25 blur-3xl" />
-        <div className="absolute right-0 top-10 h-64 w-64 animate-[blob_14s_ease-in-out_infinite_reverse] rounded-full bg-[#4ADE80]/20 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 h-48 w-48 animate-[blob_16s_ease-in-out_infinite] rounded-full bg-[#38BDF8]/15 blur-3xl" />
-        <div className="absolute bottom-4 right-1/4 h-40 w-40 animate-[blob_11s_ease-in-out_infinite_reverse] rounded-full bg-[#FF9F1C]/12 blur-3xl" />
-      </div>
-      <div className="relative rounded-[24px] border border-white/10 bg-[#0F0F11]/40 p-6 backdrop-blur-xl md:p-8">
-        {children}
-      </div>
-    </div>
   );
 }
 

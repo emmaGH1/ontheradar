@@ -1,4 +1,5 @@
 import { MotionSection } from "./MotionSection";
+import { RefractionGlass } from "./RefractionGlass";
 import { SectionBody, SectionEyebrow, SectionTitle } from "./Section";
 
 const STEPS = [
@@ -30,17 +31,16 @@ export function HowItWorks() {
       </SectionBody>
       <ol className="grid gap-4 md:grid-cols-3">
         {STEPS.map((s) => (
-          <li
-            key={s.n}
-            className="rounded-2xl border border-[#2A2A2F] bg-[#1A1A1E] p-6"
-          >
-            <p className="font-mono text-xs tracking-[0.2em] text-[#C6FF3A]">
-              {s.n}
-            </p>
-            <h3 className="mt-4 font-[family-name:var(--font-syne)] text-xl font-extrabold tracking-tight text-[#EEEEEF]">
-              {s.title}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-[#A0A0AB]">{s.body}</p>
+          <li key={s.n}>
+            <RefractionGlass compact subtle className="h-full">
+              <p className="font-mono text-xs tracking-[0.2em] text-[#C6FF3A]">
+                {s.n}
+              </p>
+              <h3 className="mt-4 font-[family-name:var(--font-syne)] text-xl font-extrabold tracking-tight text-[#EEEEEF]">
+                {s.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-[#A0A0AB]">{s.body}</p>
+            </RefractionGlass>
           </li>
         ))}
       </ol>
