@@ -1,4 +1,5 @@
-import { Section, SectionBody, SectionEyebrow, SectionTitle } from "./Section";
+import { MotionSection } from "./MotionSection";
+import { SectionBody, SectionEyebrow, SectionTitle } from "./Section";
 
 const STEPS = [
   {
@@ -20,7 +21,7 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <Section id="how-it-works">
+    <MotionSection id="how-it-works">
       <SectionEyebrow>How it works</SectionEyebrow>
       <SectionTitle>Three steps. Real CAP data.</SectionTitle>
       <SectionBody>
@@ -43,6 +44,6 @@ export function HowItWorks() {
           </li>
         ))}
       </ol>
-    </Section>
+    </MotionSection>
   );
 }

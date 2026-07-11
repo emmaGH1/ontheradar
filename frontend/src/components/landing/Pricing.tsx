@@ -1,9 +1,10 @@
 import { Button } from "./Button";
-import { Section, SectionBody, SectionEyebrow, SectionTitle } from "./Section";
+import { MotionSection } from "./MotionSection";
+import { SectionBody, SectionEyebrow, SectionTitle } from "./Section";
 
 export function Pricing() {
   return (
-    <Section id="pricing">
+    <MotionSection id="pricing">
       <SectionEyebrow>Pricing</SectionEyebrow>
       <SectionTitle>$1 per report. No subscription.</SectionTitle>
       <SectionBody>
@@ -25,6 +26,6 @@ export function Pricing() {
           <Button href="/app">Get a report</Button>
         </div>
       </div>
-    </Section>
+    </MotionSection>
   );
 }

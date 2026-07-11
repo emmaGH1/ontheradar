@@ -1,4 +1,5 @@
-import { Section, SectionBody, SectionEyebrow, SectionTitle } from "./Section";
+import { MotionSection } from "./MotionSection";
+import { SectionBody, SectionEyebrow, SectionTitle } from "./Section";
 
 const CASES = [
   {
@@ -17,7 +18,7 @@ const CASES = [
 
 export function UseCases() {
   return (
-    <Section id="use-cases" className="relative overflow-hidden">
+    <MotionSection id="use-cases" className="relative overflow-hidden">
       {/* optional morphing accent behind this section only */}
       <div
         className="pointer-events-none absolute -right-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-[#C6FF3A]/[0.06] blur-3xl"
@@ -48,6 +49,6 @@ export function UseCases() {
           ))}
         </div>
       </div>
-    </Section>
+    </MotionSection>
   );
 }

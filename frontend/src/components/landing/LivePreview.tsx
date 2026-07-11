@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Section, SectionBody, SectionEyebrow, SectionTitle } from "./Section";
+import { MotionSection } from "./MotionSection";
+import { SectionBody, SectionEyebrow, SectionTitle } from "./Section";
 
 const METRICS = [
   { label: "Orders", value: "128", hint: "All provider orders" },
@@ -126,7 +127,7 @@ export function LivePreview() {
   }, []);
 
   return (
-    <Section id="live-preview">
+    <MotionSection id="live-preview">
       <SectionEyebrow>Live preview</SectionEyebrow>
       <SectionTitle>Empty mesh loads into real metrics.</SectionTitle>
       <SectionBody>
@@ -169,6 +170,6 @@ export function LivePreview() {
           </p>
         </div>
       </RefractionGlass>
-    </Section>
+    </MotionSection>
   );
 }

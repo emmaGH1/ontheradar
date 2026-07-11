@@ -1,9 +1,9 @@
 import { Button } from "./Button";
-import { Section } from "./Section";
+import { MotionSection } from "./MotionSection";
 
 export function FinalCTA() {
   return (
-    <Section id="open-app">
+    <MotionSection id="open-app">
       <div className="relative overflow-hidden rounded-[32px] border border-[#2A2A2F] bg-[#1A1A1E] px-8 py-16 text-center md:px-16">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#C6FF3A]/10 to-transparent"
@@ -23,6 +23,6 @@ export function FinalCTA() {
           <Button href="/app">Launch OnTheRadar</Button>
         </div>
       </div>
-    </Section>
+    </MotionSection>
   );
 }
