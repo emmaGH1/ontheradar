@@ -23,6 +23,12 @@ body {
   color: var(--foreground);
 }
 
+/* Custom circular cursor (fine pointers only — class set by CustomCursor) */
+html.cursor-custom,
+html.cursor-custom * {
+  cursor: none !important;
+}
+
 @keyframes blob {
   0%,
   100% {

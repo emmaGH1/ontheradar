@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Syne, JetBrains_Mono } from "next/font/google";
+import { CustomCursor } from "@/components/CustomCursor";
 import "./globals.css";
 
 const syne = Syne({
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${syne.variable} ${spaceGrotesk.variable} ${jetbrains.variable} min-h-screen bg-[#0F0F11] font-[family-name:var(--font-space-grotesk)] text-[#EEEEEF] antialiased`}
       >
+        <CustomCursor />
         {children}
       </body>
     </html>
