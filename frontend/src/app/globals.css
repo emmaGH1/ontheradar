@@ -29,6 +29,52 @@ html.cursor-custom * {
   cursor: none !important;
 }
 
+.otr-cursor {
+  pointer-events: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  border-radius: 9999px;
+  will-change: transform, width, height;
+}
+
+/* Soft gray fill — solid enough to read the same on local + prod */
+.otr-cursor-dot {
+  background: #8a8a94;
+  box-shadow: 0 0 0 1px rgba(238, 238, 239, 0.12);
+  transition:
+    width 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.12s ease-out;
+}
+
+.otr-cursor-ring {
+  /* Gray translucent disc — not empty transparent */
+  background: rgba(120, 120, 130, 0.35);
+  border: 1px solid rgba(238, 238, 239, 0.22);
+  box-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition:
+    width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.12s ease-out,
+    opacity 0.25s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.otr-cursor-ring[data-hover="true"] {
+  background: rgba(140, 140, 150, 0.42);
+  border-color: rgba(238, 238, 239, 0.35);
+  box-shadow:
+    0 4px 28px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(238, 238, 239, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
 @keyframes blob {
   0%,
   100% {

@@ -1,15 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
- * Modern circular cursor — soft gray disc, slightly larger, subtle hover grow.
- * Disabled on coarse pointers (touch).
+ * Modern circular cursor: soft gray disc (always visible, not see-through empty).
+ * Grows with a longer ease on links/buttons. Fine pointers only.
  */
 export function CustomCursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [hover, setHover] = useState(false);
-  const [down, setDown] = useState(false);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const pos = useRef({ x: -100, y: -100 });
+  const hover = useRef(false);
+  const down = useRef(false);
+  const raf = useRef(0);
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
@@ -18,8 +21,41 @@ export function CustomCursor() {
     setEnabled(true);
     document.documentElement.classList.add("cursor-custom");
 
+    const paint = () => {
+      const { x, y } = pos.current;
+      const isHover = hover.current;
+      const isDown = down.current;
+
+      // Inner dot — always gray fill (consistent local + prod)
+      if (dotRef.current) {
+        const s = isHover ? 14 : 10;
+        const scale = isDown ? 0.75 : 1;
+        dotRef.current.style.transform = `translate3d(${x - s / 2}px, ${y - s / 2}px, 0) scale(${scale})`;
+        dotRef.current.style.width = `${s}px`;
+        dotRef.current.style.height = `${s}px`;
+      }
+
+      // Outer ring — grows clearly on interactive hover
+      if (ringRef.current) {
+        const s = isHover ? 56 : 36;
+        const scale = isDown ? 0.9 : 1;
+        ringRef.current.style.transform = `translate3d(${x - s / 2}px, ${y - s / 2}px, 0) scale(${scale})`;
+        ringRef.current.style.width = `${s}px`;
+        ringRef.current.style.height = `${s}px`;
+        ringRef.current.style.opacity = isHover ? "1" : "0.85";
+        ringRef.current.dataset.hover = isHover ? "true" : "false";
+      }
+
+      raf.current = 0;
+    };
+
+    const schedule = () => {
+      if (!raf.current) raf.current = requestAnimationFrame(paint);
+    };
+
     const onMove = (e: MouseEvent) => {
-      setPos({ x: e.clientX, y: e.clientY });
+      pos.current = { x: e.clientX, y: e.clientY };
+      schedule();
     };
 
     const onOver = (e: MouseEvent) => {
@@ -28,16 +64,27 @@ export function CustomCursor() {
       const interactive = t.closest(
         "a, button, [role='button'], input, textarea, select, label, summary",
       );
-      setHover(!!interactive);
+      const next = !!interactive;
+      if (next !== hover.current) {
+        hover.current = next;
+        schedule();
+      }
     };
 
-    const onDown = () => setDown(true);
-    const onUp = () => setDown(false);
+    const onDown = () => {
+      down.current = true;
+      schedule();
+    };
+    const onUp = () => {
+      down.current = false;
+      schedule();
+    };
 
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseover", onOver, { passive: true });
     window.addEventListener("mousedown", onDown);
     window.addEventListener("mouseup", onUp);
+    schedule();
 
     return () => {
       document.documentElement.classList.remove("cursor-custom");
@@ -45,43 +92,26 @@ export function CustomCursor() {
       window.removeEventListener("mouseover", onOver);
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("mouseup", onUp);
+      if (raf.current) cancelAnimationFrame(raf.current);
     };
   }, []);
 
   if (!enabled) return null;
 
-  // Slightly bigger default; expands on interactive targets
-  const size = hover ? 52 : 32;
-  const scale = down ? 0.88 : 1;
-  const blurAmount = hover ? "2px" : "6px";
-
   return (
-    <div
-      className="pointer-events-none fixed left-0 top-0 z-[9999]"
-      style={{
-        width: size,
-        height: size,
-        transform: `translate3d(${pos.x - size / 2}px, ${pos.y - size / 2}px, 0) scale(${scale})`,
-        transition:
-          "width 0.22s cubic-bezier(0.22, 1, 0.36, 1), height 0.22s cubic-bezier(0.22, 1, 0.36, 1), transform 0.1s ease-out",
-      }}
-      aria-hidden
-    >
+    <>
+      {/* Outer ring — gray glass, expands on hover */}
       <div
-        className="h-full w-full rounded-full"
-        style={{
-          background: hover
-            ? "transparent"
-            : "rgba(106, 106, 116, 0.45)", // text-3 gray fill
-          border: "1px solid rgba(238, 238, 239, 0.2)",
-          boxShadow: hover
-            ? "0 0 0 1px rgba(238,238,239,0.08), 0 4px 24px rgba(0,0,0,0.15)" // Softer shadow on hover
-            : "0 2px 16px rgba(0,0,0,0.28)",
-          backdropFilter: `blur(${blurAmount})`,
-          WebkitBackdropFilter: `blur(${blurAmount})`,
-          transition: "background 0.22s ease, backdrop-filter 0.22s ease, -webkit-backdrop-filter 0.22s ease, box-shadow 0.22s ease",
-        }}
+        ref={ringRef}
+        className="otr-cursor otr-cursor-ring"
+        aria-hidden
       />
-    </div>
+      {/* Center dot — solid gray core so it never “disappears” */}
+      <div
+        ref={dotRef}
+        className="otr-cursor otr-cursor-dot"
+        aria-hidden
+      />
+    </>
   );
 }
