@@ -1,9 +1,17 @@
 import type { Report, ReportError } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001";
+/**
+ * Prefer same-origin Next API route (Vercel).
+ * Optional NEXT_PUBLIC_API_URL overrides to Railway backend.
+ */
+function reportUrl(): string {
+  const external = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+  if (external) return `${external}/api/report`;
+  return "/api/report";
+}
 
 export async function fetchReport(sdkKey: string, agentId: string): Promise<Report> {
-  const res = await fetch(`${API_URL}/api/report`, {
+  const res = await fetch(reportUrl(), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ sdkKey, agentId }),

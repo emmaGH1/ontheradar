@@ -46,7 +46,9 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, report);
     } catch (err) {
       if (err instanceof APIError) {
-        return json(res, err.status >= 400 && err.status < 600 ? err.status : 502, {
+        const status =
+          err.httpStatus >= 400 && err.httpStatus < 600 ? err.httpStatus : 502;
+        return json(res, status, {
           error: err.message || err.reason,
           code: err.code,
           reason: err.reason,
