@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f0f11;
+  --foreground: #eeeeef;
+  --surface: #1a1a1e;
+  --border: #2a2a2f;
+  --text-2: #a0a0ab;
+  --text-3: #6c6c74;
+  --accent: #c6ff3a;
+  --accent-secondary: #ff9f1c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(18px, -12px) scale(1.06);
+  }
+  66% {
+    transform: translate(-14px, 10px) scale(0.96);
+  }
+}
+
+/* monospaced eyebrows use next/font mono var */
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
