@@ -44,8 +44,12 @@ npm start                    # :3001
 
 - `npm install @croo-network/sdk`
 - `new AgentClient(config, sellerKey)` → `X-SDK-Key`
-- `listOrders({ agentId, role: "provider" })`
-- Metrics derived from `Order[]` (no reputation/PTS API)
+- **Read (dashboard):** `listOrders({ agentId, role: "provider" })` → metrics
+- **Write (live agent):** WebSocket provider in `backend/src/provider.ts`
+  - `NegotiationCreated` → `acceptNegotiation`
+  - `OrderPaid` → `deliverOrder` (JSON report card)
+  - Requires `CROO_SDK_KEY` + `CROO_AGENT_ID` on the Railway process
+  - Status: `GET /provider/status` / included on `GET /health`
 
 ## Design
 

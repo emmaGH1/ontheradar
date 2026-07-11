@@ -1,5 +1,6 @@
 import http from "node:http";
 import { buildReport } from "./report.js";
+import { startProvider, getProviderStatus } from "./provider.js";
 import { APIError } from "@croo-network/sdk";
 
 const PORT = Number(process.env.PORT ?? 3001);
@@ -27,10 +28,23 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (req.method === "GET" && req.url === "/health") {
-    return json(res, 200, { ok: true });
+    const provider = getProviderStatus();
+    return json(res, 200, {
+      ok: true,
+      provider: {
+        enabled: provider.enabled,
+        running: provider.running,
+        accepted: provider.accepted,
+        delivered: provider.delivered,
+      },
+    });
   }
 
-  // POST /api/report  { sdkKey, agentId }
+  if (req.method === "GET" && req.url === "/provider/status") {
+    return json(res, 200, getProviderStatus());
+  }
+
+  // POST /api/report  { sdkKey, agentId } — dashboard read path
   if (req.method === "POST" && req.url === "/api/report") {
     try {
       const raw = await readBody(req);
@@ -65,4 +79,8 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`ontheradar backend listening on :${PORT}`);
+  // CAP provider (negotiate → accept → deliver) — async, non-blocking
+  startProvider().catch((err) => {
+    console.error("[provider] start failed:", err);
+  });
 });

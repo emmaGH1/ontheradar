@@ -39,7 +39,7 @@ async function main() {
   } catch (err) {
     if (err instanceof APIError) {
       console.error("CAP APIError:", {
-        status: err.status,
+        status: err.httpStatus,
         code: err.code,
         reason: err.reason,
         message: err.message,
