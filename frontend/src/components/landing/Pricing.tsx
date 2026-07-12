@@ -21,7 +21,7 @@ export function Pricing() {
     <MotionSection id="pricing">
       <div className="text-center">
         <SectionEyebrow>Pricing</SectionEyebrow>
-        <SectionTitle>$1 per report. No subscription.</SectionTitle>
+        <SectionTitle>$0.05 per report. No subscription.</SectionTitle>
         <SectionBody>
           Pay when you want a fresh scorecard. One agent, one pull from CAP, one
           clear report card.

@@ -45,7 +45,7 @@ project-specific fills:
   the 2-3 total accent moments on the page — don't overuse)
 
 **5. Pricing**
-- Dead simple: "$1 per report. No subscription." Editorial, not corporate
+- Dead simple: "$0.05 per report. No subscription." Editorial, not corporate
   (per skill file's tone rule)
 
 **6. Final CTA → into the app**
