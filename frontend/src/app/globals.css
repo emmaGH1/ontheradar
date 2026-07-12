@@ -18,6 +18,10 @@
   --font-mono: var(--font-mono);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -50,9 +54,11 @@ html.cursor-custom * {
 }
 
 .otr-cursor-ring {
-  /* Gray translucent disc — not empty transparent */
-  background: rgba(120, 120, 130, 0.35);
+  /* Gray translucent disc with backdrop-filter blur */
+  background: rgba(120, 120, 130, 0.18);
   border: 1px solid rgba(238, 238, 239, 0.22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   box-shadow:
     0 2px 16px rgba(0, 0, 0, 0.25),
     inset 0 0 0 1px rgba(255, 255, 255, 0.04);
@@ -63,17 +69,51 @@ html.cursor-custom * {
     opacity 0.25s ease,
     background 0.35s ease,
     border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease,
+    -webkit-backdrop-filter 0.35s ease;
 }
 
 .otr-cursor-ring[data-hover="true"] {
-  background: rgba(140, 140, 150, 0.42);
-  border-color: rgba(238, 238, 239, 0.35);
+  background: rgba(140, 140, 150, 0.28);
+  border-color: rgba(238, 238, 239, 0.45);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
   box-shadow:
     0 4px 28px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(238, 238, 239, 0.08),
     inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
+
+/* Premium pulse animation pseudo-element using the accent color */
+.otr-cursor-ring::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(198, 255, 58, 0.45);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.otr-cursor-ring[data-hover="true"]::after {
+  animation: cursor-pulse-glow 1.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+@keyframes cursor-pulse-glow {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
 
 @keyframes blob {
   0%,

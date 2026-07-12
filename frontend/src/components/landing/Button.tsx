@@ -18,7 +18,7 @@ export function Button({ href, children, variant = "primary", className = "" }: 
     return (
       <Link
         href={href}
-        className={`${base} border border-[#2A2A2F] bg-transparent text-[#EEEEEF] hover:border-[#C6FF3A] hover:text-[#C6FF3A] ${className}`}
+        className={`${base} border border-white/20 bg-transparent text-[#EEEEEF] hover:border-[#C6FF3A] hover:text-[#C6FF3A] ${className}`}
       >
         {children}
       </Link>

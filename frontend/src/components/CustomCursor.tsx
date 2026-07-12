@@ -28,7 +28,7 @@ export function CustomCursor() {
 
       // Inner dot — always gray fill (consistent local + prod)
       if (dotRef.current) {
-        const s = isHover ? 14 : 10;
+        const s = isHover ? 6 : 10;
         const scale = isDown ? 0.75 : 1;
         dotRef.current.style.transform = `translate3d(${x - s / 2}px, ${y - s / 2}px, 0) scale(${scale})`;
         dotRef.current.style.width = `${s}px`;
@@ -37,7 +37,7 @@ export function CustomCursor() {
 
       // Outer ring — grows clearly on interactive hover
       if (ringRef.current) {
-        const s = isHover ? 56 : 36;
+        const s = isHover ? 64 : 36;
         const scale = isDown ? 0.9 : 1;
         ringRef.current.style.transform = `translate3d(${x - s / 2}px, ${y - s / 2}px, 0) scale(${scale})`;
         ringRef.current.style.width = `${s}px`;
