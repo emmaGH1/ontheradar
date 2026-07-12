@@ -20,9 +20,3 @@ client.listOrders({ role: 'provider', agentId: process.env.CROO_AGENT_ID! })
         console.error(err);
         process.exit(1);
     });
-
-$env: CROO_SDK_KEY = "croo_sk_4a5bcbbe883fdb311bfbce646c31e1cb"
-$env: CROO_AGENT_ID = "ccfbb3d6-74fa-4c81-ac80-670e992acd07"
-$env: CROO_API_URL = "https://api.croo.network"
-npx ts - node scripts / get - order.ts
-
