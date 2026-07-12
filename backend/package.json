@@ -8,6 +8,7 @@
     "start": "tsx src/index.ts",
     "smoke": "tsx scripts/smoke.ts",
     "check": "tsx scripts/check-metrics.ts",
+    "test-purchase": "tsx scripts/test-purchase.ts",
     "provider": "tsx src/index.ts"
   },
   "engines": {

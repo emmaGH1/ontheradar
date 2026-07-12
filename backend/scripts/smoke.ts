@@ -10,6 +10,25 @@
  */
 import { buildReport } from "../src/report.js";
 import { APIError } from "@croo-network/sdk";
+import fs from "node:fs";
+import path from "node:path";
+
+// Auto-load .env (same pattern as test-purchase.ts)
+const envPath = path.resolve(process.cwd(), ".env");
+if (fs.existsSync(envPath)) {
+  for (const line of fs.readFileSync(envPath, "utf8").split("\n")) {
+    const t = line.trim();
+    if (t && !t.startsWith("#")) {
+      const idx = t.indexOf("=");
+      if (idx > 0) {
+        const k = t.substring(0, idx).trim();
+        const v = t.substring(idx + 1).trim();
+        if (!process.env[k]) process.env[k] = v;
+      }
+    }
+  }
+}
+
 
 async function main() {
   const sdkKey = process.argv[2] ?? process.env.CROO_SDK_KEY ?? "";
