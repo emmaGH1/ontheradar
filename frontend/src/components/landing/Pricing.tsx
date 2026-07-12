@@ -35,7 +35,7 @@ export function Pricing() {
               Single report
             </p>
             <p className="mt-4 font-[family-name:var(--font-syne)] text-5xl font-extrabold tracking-tight text-[#C6FF3A]">
-              $1
+              $0.05
             </p>
             <p className="mt-3 text-sm leading-relaxed text-[#A0A0AB]">
               One agent. One CAP pull. Four metrics on your post-launch report
