@@ -37,12 +37,14 @@ export function CustomCursor() {
 
       // Outer ring — grows clearly on interactive hover
       if (ringRef.current) {
-        const s = isHover ? 64 : 36;
+        const s = isHover ? 76 : 36;
         const scale = isDown ? 0.9 : 1;
         ringRef.current.style.transform = `translate3d(${x - s / 2}px, ${y - s / 2}px, 0) scale(${scale})`;
         ringRef.current.style.width = `${s}px`;
         ringRef.current.style.height = `${s}px`;
         ringRef.current.style.opacity = isHover ? "1" : "0.85";
+        ringRef.current.style.outline = "none";
+        ringRef.current.style.border = "none";
         ringRef.current.dataset.hover = isHover ? "true" : "false";
       }
 

@@ -48,11 +48,7 @@ export function HeroArcGlow() {
             <stop offset="70%" stopColor="#C6FF3A" stopOpacity="0.35" />
             <stop offset="100%" stopColor="#C6FF3A" stopOpacity="0" />
           </linearGradient>
-          <linearGradient id="arc-c" x1="0%" y1="80%" x2="100%" y2="20%">
-            <stop offset="0%" stopColor="#C6FF3A" stopOpacity="0" />
-            <stop offset="40%" stopColor="#C6FF3A" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#C6FF3A" stopOpacity="0" />
-          </linearGradient>
+
           <filter id="arc-soft" x="-40%" y="-40%" width="180%" height="180%">
             <feGaussianBlur stdDeviation="10" result="b" />
             <feMerge>
@@ -90,12 +86,7 @@ export function HeroArcGlow() {
             strokeWidth="22"
             strokeLinecap="round"
           />
-          <path
-            d="M 200 -40 C 360 160, 420 360, 560 480 C 720 620, 980 700, 1500 640"
-            stroke="url(#arc-c)"
-            strokeWidth="18"
-            strokeLinecap="round"
-          />
+
         </g>
 
         {/* Soft mid strokes */}
@@ -112,12 +103,7 @@ export function HeroArcGlow() {
             strokeWidth="5"
             strokeLinecap="round"
           />
-          <path
-            d="M 200 -40 C 360 160, 420 360, 560 480 C 720 620, 980 700, 1500 640"
-            stroke="url(#arc-c)"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
+
         </g>
 
         {/* Focused core lines — the “sharp” light inside the glow */}
@@ -136,13 +122,7 @@ export function HeroArcGlow() {
             strokeLinecap="round"
             opacity="0.75"
           />
-          <path
-            d="M 200 -40 C 360 160, 420 360, 560 480 C 720 620, 980 700, 1500 640"
-            stroke="#D4FF6A"
-            strokeWidth="1"
-            strokeLinecap="round"
-            opacity="0.65"
-          />
+
         </g>
       </svg>
 

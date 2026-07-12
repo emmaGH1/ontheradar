@@ -71,7 +71,7 @@ export function Navbar() {
                 href={link.href}
                 className={`inline-block rounded-full px-2 py-1.5 text-[11px] transition sm:px-3 sm:text-sm ${
                   link.href === "/app"
-                    ? "bg-[#C6FF3A] font-medium text-[#0F0F11] hover:scale-95 hover:bg-[#D4FF6A] hover:text-[#0F0F11] active:scale-90"
+                    ? "bg-[#C6FF3A] font-medium text-[#0F0F11] ring-1 ring-[#C6FF3A]/40 hover:scale-95 hover:bg-[#D4FF6A] hover:text-[#0F0F11] active:scale-90"
                     : "text-[#A0A0AB] hover:text-[#C6FF3A]"
                 }`}
               >
